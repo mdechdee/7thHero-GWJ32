@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/PlayerController.gd" type="Script" id=2]
+[ext_resource path="res://Player/UnitMovement.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+
+[sub_resource type="RayShape2D" id=2]
+length = 7.26175
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 4, 2 )
+
+[node name="Player" type="KinematicBody2D"]
+z_index = 3
+collision_mask = 16
+
+[node name="SpeedDebugger" type="Label" parent="."]
+margin_top = -42.0
+margin_right = 40.0
+margin_bottom = -28.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BodyShape" type="CollisionShape2D" parent="."]
+position = Vector2( -1.45132, -2.06456 )
+shape = SubResource( 1 )
+
+[node name="RayL" type="CollisionShape2D" parent="."]
+position = Vector2( -10.4297, 11.6499 )
+shape = SubResource( 2 )
+
+[node name="RayR" type="CollisionShape2D" parent="."]
+position = Vector2( 7.98245, 11.7094 )
+shape = SubResource( 2 )
+
+[node name="Position2D" type="Position2D" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="AnimatedSprite" parent="Position2D"]
+offset = Vector2( -8, -30 )
+
+[node name="SwordThrust" type="Area2D" parent="Position2D/Sprite"]
+position = Vector2( 15.3698, -3.40554 )
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/Sprite/SwordThrust"]
+shape = SubResource( 3 )
+
+[node name="InviTimer" type="Timer" parent="."]
+
+[node name="ComboTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PlayerController" type="Node" parent="."]
+script = ExtResource( 2 )
+unit = NodePath("../UnitMovement")
+
+[node name="UnitMovement" type="Node" parent="."]
+script = ExtResource( 3 )
+MOVE_SPEED = 50.0
+DASH_SPEED = 3000.0
+
+[node name="DashTimer" type="Timer" parent="UnitMovement"]
+wait_time = 0.2
+one_shot = true
+[connection signal="timeout" from="InviTimer" to="." method="_on_InviTimer_timeout"]
+[connection signal="timeout" from="UnitMovement/DashTimer" to="UnitMovement" method="_on_DashTimer_timeout"]
