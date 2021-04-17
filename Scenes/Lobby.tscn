@@ -5,25 +5,21 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 0, -200 )
-current = true
-
 [node name="HostButton" type="Button" parent="."]
-margin_left = -454.0
-margin_top = -434.0
-margin_right = -299.0
-margin_bottom = -371.0
+margin_left = 37.6383
+margin_top = 48.6587
+margin_right = 192.638
+margin_bottom = 111.659
 text = "Host"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="JoinButton" type="Button" parent="."]
-margin_left = -257.364
-margin_top = -434.841
-margin_right = -80.3636
-margin_bottom = -369.841
+margin_left = 234.274
+margin_top = 47.8177
+margin_right = 411.275
+margin_bottom = 112.818
 text = "Join"
 __meta__ = {
 "_edit_use_anchors_": false

@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="7 Th Hero(Gwj 32)"
-run/main_scene="res://Scenes/UnitTestScene.tscn"
+run/main_scene="res://Scenes/Lobby.tscn"
 config/icon="res://icon.png"
 
 [autoload]

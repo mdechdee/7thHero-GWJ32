@@ -29,15 +29,20 @@ func adjust_acc_penalty(delta):
 	shot_times = clamp(shot_times, 0, 90)
 	acc_radius_penalty = atan(deg2rad(shot_times)) * 30
 
-func shoot():
+puppet func shoot():
 	if !$BulletTimer.is_stopped():
 		return
+	shot_times += 1
+	gen_bullet()
+	$RecoilTimer.start()
+	$BulletTimer.start()
+	if GlobalVar.IS_ONLINE and is_network_master():
+		rpc_unreliable("gen_bullet")
+
+puppet func gen_bullet():
 	var bullet = bullet_scene.instance()
 	var total_acc_radius = ACC_RADIUS + acc_radius_penalty
 	bullet.global_position = global_position
 	bullet.rotation = get_global_transform().get_rotation()
 	bullet.rotation_degrees += randf() * total_acc_radius - total_acc_radius/2
 	get_tree().current_scene.add_child(bullet)
-	shot_times += 1
-	$RecoilTimer.start()
-	$BulletTimer.start()

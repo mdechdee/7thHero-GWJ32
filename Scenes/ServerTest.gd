@@ -7,7 +7,7 @@ func _ready():
 func _player_connected(id):
 	GlobalVar.other_player_id = id
 	GlobalVar.IS_ONLINE = true
-	get_tree().change_scene("res://Scenes/UnitTestScene.tscn")
+	get_tree().change_scene("res://Scenes/MultiplayerTestScene.tscn")
 	
 func _on_packet_recieved(id, packet):
 	$Label.text = packet.get_string_from_ascii()

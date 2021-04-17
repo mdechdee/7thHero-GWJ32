@@ -9,11 +9,13 @@ var move: Vector2
 var is_dashing: bool = false
 puppet var puppet_pos: Vector2
 puppet var puppet_move: Vector2
+puppet var puppet_rot: float
 
 func _physics_process(_delta):
 	if GlobalVar.IS_ONLINE and !is_network_master():
 		body.position = puppet_pos
 		move = puppet_move
+		body.get_node("HeadPosition").rotation = puppet_rot
 	else:
 		if is_dashing:
 			on_dash()
@@ -22,6 +24,7 @@ func _physics_process(_delta):
 		if GlobalVar.IS_ONLINE:
 			rset_unreliable("puppet_move", move)
 			rset_unreliable("puppet_pos", body.position)
+			rset_unreliable("puppet_rot", body.get_node("HeadPosition").rotation)
 	if GlobalVar.IS_ONLINE and !is_network_master():
 		puppet_pos = body.position # To avoid jitter
 	if GlobalVar.DEBUG:
@@ -34,7 +37,7 @@ func do_move_input(dir: Vector2):
 		move.x = lerp(move.x,0,0.2)
 	move += dir * MOVE_SPEED
 
-func do_aim(aim_at: Vector2):
+puppet func do_aim(aim_at: Vector2):
 	($"../HeadPosition" as Position2D).look_at(aim_at)
 	
 func do_dash(dir:Vector2):
