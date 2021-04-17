@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/MultiplayerTestScene.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 320, 24 )
+
+[node name="MultiplayerTestScene" type="Node2D"]
+script = ExtResource( 1 )
+player_scene = ExtResource( 3 )
+
+[node name="Platform" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Platform"]
+scale = Vector2( 9.97233, 1 )
+texture = ExtResource( 2 )
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2( -650, -170 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="Platform2"]
+scale = Vector2( 9.97233, 1 )
+texture = ExtResource( 2 )
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2( 670, -170 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource( 1 )
+
+[node name="Sprite3" type="Sprite" parent="Platform3"]
+scale = Vector2( 9.97233, 1 )
+texture = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 0, -200 )
+current = true
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSpawn1" type="Position2D" parent="."]
+position = Vector2( -187.99, -158.858 )
+
+[node name="PlayerSpawn2" type="Position2D" parent="."]
+position = Vector2( 222.831, -158.858 )

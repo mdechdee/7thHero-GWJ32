@@ -11,7 +11,7 @@ puppet var puppet_pos: Vector2
 puppet var puppet_move: Vector2
 
 func _physics_process(_delta):
-	if !is_network_master():
+	if GlobalVar.IS_ONLINE and !is_network_master():
 		body.position = puppet_pos
 		move = puppet_move
 	else:
@@ -19,9 +19,10 @@ func _physics_process(_delta):
 			on_dash()
 		else:
 			on_move()
-		rset_unreliable("puppet_move", move)
-		rset_unreliable("puppet_pos", body.position)
-	if !is_network_master():
+		if GlobalVar.IS_ONLINE:
+			rset_unreliable("puppet_move", move)
+			rset_unreliable("puppet_pos", body.position)
+	if GlobalVar.IS_ONLINE and !is_network_master():
 		puppet_pos = body.position # To avoid jitter
 	if GlobalVar.DEBUG:
 		debug()

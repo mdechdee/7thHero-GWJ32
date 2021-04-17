@@ -5,14 +5,13 @@ export(NodePath) onready var unit = get_node(unit) as UnitMovement
 var input_log: Dictionary
 onready var actions: Array = InputMap.get_actions()
 
-
 func _ready():
 	Input.set_use_accumulated_input(false)
 	input_log["move_left"] = ActionHistory.new()
 	assert(unit != null, "UnitMovement node is not assigned")
 
 func _physics_process(delta):
-	if !is_network_master():
+	if GlobalVar.IS_ONLINE and !is_network_master():
 		return
 	else:
 		var mouse_pos = unit.body.get_global_mouse_position()
@@ -45,6 +44,8 @@ func handle_input_log(time):
 			
 func handle_aim(mouse_pos: Vector2):
 	unit.do_aim(mouse_pos)
+	if Input.is_action_pressed("attack"):
+		owner.emit_signal("on_attack")
 	
 func handle_special_movement(mouse_pos: Vector2):
 	if(Input.is_action_just_pressed("dash")):
