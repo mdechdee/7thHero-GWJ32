@@ -9,19 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "ActionHistory",
+"language": "GDScript",
+"path": "res://ActionHistory.gd"
+}, {
 "base": "Node",
 "class": "UnitMovement",
 "language": "GDScript",
 "path": "res://Player/UnitMovement.gd"
 } ]
 _global_script_class_icons={
+"ActionHistory": "",
 "UnitMovement": ""
 }
 
 [application]
 
-config/name="7 Th Hero( Gwj 32)"
-run/main_scene="res://Scenes/UnitTestScene.tscn"
+config/name="7 Th Hero(Gwj 32)"
+run/main_scene="res://Scenes/Lobby.tscn"
 config/icon="res://icon.png"
 
 [autoload]
