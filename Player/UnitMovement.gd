@@ -7,26 +7,12 @@ export(float, 2000, 3000) var DASH_SPEED
 
 var move: Vector2
 var is_dashing: bool = false
-puppet var puppet_pos: Vector2
-puppet var puppet_move: Vector2
-puppet var puppet_rot: float
 
 func _physics_process(_delta):
-	if GlobalVar.IS_ONLINE and !is_network_master():
-		body.position = puppet_pos
-		move = puppet_move
-		body.get_node("HeadPosition").rotation = puppet_rot
+	if is_dashing:
+		on_dash()
 	else:
-		if is_dashing:
-			on_dash()
-		else:
-			on_move()
-		if GlobalVar.IS_ONLINE:
-			rset_unreliable("puppet_move", move)
-			rset_unreliable("puppet_pos", body.position)
-			rset_unreliable("puppet_rot", body.get_node("HeadPosition").rotation)
-	if GlobalVar.IS_ONLINE and !is_network_master():
-		puppet_pos = body.position # To avoid jitter
+		on_move()
 	if GlobalVar.DEBUG:
 		debug()
 

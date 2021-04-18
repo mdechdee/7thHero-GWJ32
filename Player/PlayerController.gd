@@ -11,19 +11,13 @@ func _ready():
 	assert(unit != null, "UnitMovement node is not assigned")
 
 func _physics_process(delta):
-	if GlobalVar.IS_ONLINE and !is_network_master():
-		return
-	else:
-		var mouse_pos = unit.body.get_global_mouse_position()
-		var time = OS.get_ticks_msec()
-		handle_horizontal()
-		handle_special_movement(mouse_pos)
-		handle_aim(mouse_pos)
-		handle_input_log(time)
-	if GlobalVar.DEBUG:
-		for action in input_log:
-			var action_history = input_log[action] as ActionHistory
-			$"../InputDebugger".text = action + "\n" + action_history.to_string()
+	var mouse_pos = unit.body.get_global_mouse_position()
+	var time = OS.get_ticks_msec()
+	handle_horizontal()
+	handle_special_movement(mouse_pos)
+	handle_aim(mouse_pos)
+	handle_input_log(time)
+	debug()
 
 func handle_input_log(time):
 	for action in actions:
@@ -58,3 +52,9 @@ func handle_horizontal():
 		unit.do_move_input(Vector2.LEFT)
 	if(!Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right")):
 		unit.do_move_input(Vector2.ZERO)
+
+func debug():
+	if GlobalVar.DEBUG:
+		for action in input_log:
+			var action_history = input_log[action] as ActionHistory
+			$"../InputDebugger".text = action + "\n" + action_history.to_string()

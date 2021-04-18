@@ -1,25 +1,34 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Player/PlayerController.gd" type="Script" id=2]
 [ext_resource path="res://Player/UnitMovement.gd" type="Script" id=3]
 [ext_resource path="res://Player/Player.gd" type="Script" id=4]
 [ext_resource path="res://Gun.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Player/PlayerPuppetController.gd" type="Script" id=6]
+[ext_resource path="res://Player/StatsController.gd" type="Script" id=7]
+[ext_resource path="res://Player/TeamController.gd" type="Script" id=8]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.235294, 0.235294, 1 )
+corner_detail = 20
 
-[sub_resource type="RayShape2D" id=2]
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+
+[sub_resource type="RayShape2D" id=4]
 length = 7.26175
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 4, 2 )
-
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 4.50272, 1.32433 )
 z_index = 3
 collision_mask = 16
 script = ExtResource( 4 )
 
 [node name="Name" type="Label" parent="."]
+visible = false
 margin_top = -36.416
 margin_right = 40.0
 margin_bottom = -22.416
@@ -28,6 +37,7 @@ __meta__ = {
 }
 
 [node name="SpeedDebugger" type="Label" parent="."]
+visible = false
 margin_left = 13.0815
 margin_top = 8.46239
 margin_right = 53.0815
@@ -37,6 +47,7 @@ __meta__ = {
 }
 
 [node name="InputDebugger" type="Label" parent="."]
+visible = false
 margin_left = -181.0
 margin_top = -69.0
 margin_right = -1.0
@@ -46,22 +57,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HpDebugger" type="ProgressBar" parent="."]
+visible = false
+margin_left = -29.0
+margin_top = 26.0
+margin_right = 29.0
+margin_bottom = 33.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BodyShape" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="RayL" type="CollisionShape2D" parent="."]
 position = Vector2( -9, 12 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="RayR" type="CollisionShape2D" parent="."]
 position = Vector2( 9, 12 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -72,27 +97,13 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="SwordThrust" type="Area2D" parent="HeadPosition"]
-visible = false
-position = Vector2( 16, 0 )
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HeadPosition/SwordThrust"]
-shape = SubResource( 3 )
-
-[node name="Sprite2" type="Sprite" parent="HeadPosition/SwordThrust"]
-position = Vector2( -0.0901003, 0.356781 )
-scale = Vector2( 0.112286, 0.0612206 )
-texture = ExtResource( 1 )
-
 [node name="Gun" parent="HeadPosition" instance=ExtResource( 5 )]
 position = Vector2( 23.9385, 0 )
 
-[node name="InviTimer" type="Timer" parent="."]
-
-[node name="ComboTimer" type="Timer" parent="."]
-one_shot = true
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 1.82245 )
+scale = Vector2( 0.289063, 0.658514 )
+texture = ExtResource( 1 )
 
 [node name="PlayerController" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -107,9 +118,15 @@ DASH_SPEED = 3000.0
 wait_time = 0.2
 one_shot = true
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 1.82245 )
-scale = Vector2( 0.289063, 0.658514 )
-texture = ExtResource( 1 )
-[connection signal="timeout" from="InviTimer" to="." method="_on_InviTimer_timeout"]
+[node name="PlayerPuppetController" type="Node" parent="."]
+script = ExtResource( 6 )
+player_controller = NodePath("../PlayerController")
+unit = NodePath("../UnitMovement")
+
+[node name="StatsController" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="TeamController" type="Node" parent="."]
+script = ExtResource( 8 )
+gun = NodePath("../HeadPosition/Gun")
 [connection signal="timeout" from="UnitMovement/DashTimer" to="UnitMovement" method="_on_DashTimer_timeout"]
