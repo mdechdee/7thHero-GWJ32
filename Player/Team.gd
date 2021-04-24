@@ -1,4 +1,5 @@
 extends Node
+class_name Team
 
 export(GlobalVar.TEAM) var team = GlobalVar.TEAM.ONE
 export(NodePath) onready var gun = get_node(gun) as Gun

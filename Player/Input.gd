@@ -14,6 +14,7 @@ func _physics_process(delta):
 	handle_dash(mouse_pos)
 	handle_door()
 	handle_aim(mouse_pos)
+	handle_skill()
 	handle_input_log(time)
 	debug()
 
@@ -42,6 +43,26 @@ func handle_aim(mouse_pos: Vector2):
 	owner.emit_signal("on_aim", mouse_pos)
 	if Input.is_action_pressed("attack"):
 		owner.emit_signal("on_attack")
+	if Input.is_action_just_pressed("attack"):
+		owner.emit_signal("on_attack_just_pressed")	
+	if Input.is_action_just_released("attack"):
+		owner.emit_signal("on_attack_just_released")
+		
+func handle_skill():
+	if Input.is_action_pressed("skill_e"):
+		owner.emit_signal("on_skill_e")
+	if Input.is_action_just_pressed("skill_e"):
+		owner.emit_signal("on_skill_e_just_pressed")
+	if Input.is_action_just_released("skill_e"):
+		owner.emit_signal("on_skill_e_just_released")
+		
+	if Input.is_action_pressed("skill_q"):
+		owner.emit_signal("on_skill_q")
+	if Input.is_action_just_pressed("skill_q"):
+		owner.emit_signal("on_skill_q_just_pressed")	
+	if Input.is_action_just_released("skill_q"):
+		owner.emit_signal("on_skill_q_just_released")
+
 	
 func handle_dash(mouse_pos: Vector2):
 	if(Input.is_action_just_pressed("dash")):

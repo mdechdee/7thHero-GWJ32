@@ -132,4 +132,5 @@ gun = NodePath("../HeadPosition/Gun")
 
 [node name="DoorMovement" type="Node" parent="."]
 script = ExtResource( 9 )
+
 [connection signal="timeout" from="Movement/DashTimer" to="Movement" method="_on_DashTimer_timeout"]
