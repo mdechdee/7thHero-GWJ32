@@ -15,8 +15,15 @@ func _physics_process(delta):
 	handle_door()
 	handle_aim(mouse_pos)
 	handle_skill()
+	handle_pick()
 	handle_input_log(time)
 	debug()
+
+func handle_pick():
+	if Input.is_action_just_pressed("drop_weapon"):
+		owner.emit_signal("on_drop_weapon")
+	if Input.is_action_just_pressed("interact"):
+		owner.emit_signal("on_interact")
 
 func handle_door():
 	if Input.is_action_just_pressed("enter_door"):

@@ -51,16 +51,15 @@ modulate = Color( 1, 0.345098, 0.345098, 1 )
 position = Vector2( 186.088, -54.2712 )
 collision_layer = 2
 
-[node name="Input" parent="Player2" index="9"]
+[node name="Input" parent="Player2" index="8"]
 script = null
 
-[node name="PuppetController" parent="Player2" index="11"]
+[node name="PuppetController" parent="Player2" index="10"]
 player_controller = NodePath("../../Player2/Input")
 movement = NodePath("../../Player2/Movement")
 
-[node name="Team" parent="Player2" index="13"]
+[node name="Team" parent="Player2" index="12"]
 team = 1
-gun = NodePath("../../Player2/HeadPosition/Gun")
 
 [node name="Layer1" type="Node2D" parent="."]
 
@@ -80,7 +79,7 @@ linked_door = NodePath("../../Layer2/Door2_2")
 
 [node name="Platform" type="StaticBody2D" parent="Layer1"]
 collision_layer = 0
-collision_mask = 31
+collision_mask = 1055
 
 [node name="Sprite" type="Sprite" parent="Layer1/Platform"]
 scale = Vector2( 9.97233, 1 )
@@ -92,7 +91,7 @@ shape = SubResource( 2 )
 [node name="Platform2" type="StaticBody2D" parent="Layer1"]
 position = Vector2( -650, -170 )
 collision_layer = 0
-collision_mask = 31
+collision_mask = 1055
 
 [node name="Sprite2" type="Sprite" parent="Layer1/Platform2"]
 scale = Vector2( 9.97233, 1 )
@@ -104,7 +103,7 @@ shape = SubResource( 2 )
 [node name="Platform3" type="StaticBody2D" parent="Layer1"]
 position = Vector2( 670, -170 )
 collision_layer = 0
-collision_mask = 31
+collision_mask = 1055
 
 [node name="Sprite3" type="Sprite" parent="Layer1/Platform3"]
 scale = Vector2( 9.97233, 1 )
@@ -114,11 +113,10 @@ texture = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Platform4" type="StaticBody2D" parent="Layer1"]
-position = Vector2( 1526.23, -170 )
-rotation = 1.5708
+position = Vector2( 129.317, -817.66 )
 scale = Vector2( 5, 1 )
 collision_layer = 0
-collision_mask = 31
+collision_mask = 1055
 
 [node name="Sprite3" type="Sprite" parent="Layer1/Platform4"]
 scale = Vector2( 9.97233, 1 )
@@ -128,7 +126,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 2 )
 
 [node name="Layer2" type="Node2D" parent="."]
-position = Vector2( 2806.69, 0 )
+position = Vector2( 0.161133, -1579.27 )
 
 [node name="BG" type="TileMap" parent="Layer2"]
 modulate = Color( 0.278431, 0.278431, 0.278431, 0.498039 )
@@ -140,7 +138,7 @@ tile_data = PoolIntArray( -720914, 0, 0, -720913, 0, 0, -720912, 0, 0, -720911, 
 position = Vector2( 0, -173.673 )
 scale = Vector2( 3, 1 )
 collision_layer = 0
-collision_mask = 31
+collision_mask = 1055
 
 [node name="Sprite" type="Sprite" parent="Layer2/Platform"]
 scale = Vector2( 9.97233, 1 )

@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Gun/Pickable.gd" type="Script" id=1]
+[ext_resource path="res://Gun/PickArea.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 11.5, 6.75 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 24.7706, 19.2704 )
+
+[node name="Pickable" type="Node2D"]
+
+[node name="PickBody" type="KinematicBody2D" parent="."]
+collision_layer = 1024
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickBody"]
+shape = SubResource( 2 )
+
+[node name="PickArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 31
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickArea"]
+shape = SubResource( 1 )

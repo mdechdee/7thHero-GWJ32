@@ -19,6 +19,9 @@ signal on_attacked()
 signal on_kill(victim)
 signal on_dead()
 
+signal on_drop_weapon()
+signal on_interact()
+
 signal on_door_entered(door)
 signal on_door_exited(door)
 signal on_enter_door()
