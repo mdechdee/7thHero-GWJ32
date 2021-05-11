@@ -6,6 +6,7 @@ onready var actions: Array = InputMap.get_actions()
 func _ready():
 	Input.set_use_accumulated_input(false)
 	input_log["move_left"] = ActionHistory.new()
+	input_log["move_right"] = ActionHistory.new()
 
 func _physics_process(delta):
 	var mouse_pos = owner.get_global_mouse_position()
@@ -17,7 +18,12 @@ func _physics_process(delta):
 	handle_skill()
 	handle_pick()
 	handle_input_log(time)
+	handle_jump()
 	debug()
+
+func handle_jump():
+	if Input.is_action_just_pressed("jump"):
+		owner.emit_signal("on_jump")
 
 func handle_pick():
 	if Input.is_action_just_pressed("drop_weapon"):
@@ -35,13 +41,13 @@ func handle_input_log(time):
 			continue
 		if Input.is_action_just_pressed(action):
 			var action_history = input_log[action] as ActionHistory
-			action_history.current = true
+			action_history.is_being_pressed = true
 			action_history.pressed_time.append(time)
 			if(action_history.pressed_time.size() > 2):
 				action_history.pressed_time.pop_front()
 		elif Input.is_action_just_released(action):
 			var action_history = input_log[action] as ActionHistory
-			action_history.current = false
+			action_history.is_being_pressed = false
 			action_history.released_time.append(time)
 			if(action_history.released_time.size() > 2):
 				action_history.released_time.pop_front()
@@ -73,7 +79,11 @@ func handle_skill():
 	
 func handle_dash(mouse_pos: Vector2):
 	if(Input.is_action_just_pressed("dash")):
-		owner.emit_signal("on_dash", owner.global_position.direction_to(mouse_pos))
+		if Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right"):
+			owner.emit_signal("on_dash", Vector2.LEFT)
+		if Input.is_action_pressed("move_right") and !Input.is_action_pressed("move_left"):
+			owner.emit_signal("on_dash", Vector2.RIGHT)
+#		owner.emit_signal("on_dash", owner.global_position.direction_to(mouse_pos))
 		
 func handle_horizontal():
 	if(Input.is_action_pressed("move_right")):

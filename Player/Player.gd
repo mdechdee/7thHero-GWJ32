@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal on_move(move)
 signal on_dash(dir)
 signal on_aim(dir)
+signal on_jump()
 
 signal on_attack()
 signal on_attack_just_pressed()

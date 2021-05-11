@@ -1,6 +1,6 @@
 class_name ActionHistory
 
-var current: bool = false
+var is_being_pressed: bool = false
 var pressed_time: Array = []
 var released_time: Array = []
 
