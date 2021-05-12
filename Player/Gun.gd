@@ -1,10 +1,9 @@
 extends Weapon
 class_name Gun
+export(int, 0 ,30) var MAX_AMMO: int = 20
 
 signal bullet_shot(bullet)
 signal on_shoot
-
-export(int, 0 ,30) var MAX_AMMO: int = 20
 
 func _ready():
 	if GlobalVar.DEBUG:
@@ -14,4 +13,3 @@ func _ready():
 
 puppet func do_attack():
 	emit_signal("on_shoot")
-

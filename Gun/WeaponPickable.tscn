@@ -9,7 +9,7 @@ extents = Vector2( 11.5, 6.75 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 24.7706, 19.2704 )
 
-[node name="PickBody" type="KinematicBody2D"]
+[node name="WeaponPickable" type="KinematicBody2D"]
 collision_layer = 1024
 collision_mask = 0
 script = ExtResource( 1 )
@@ -20,10 +20,16 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
-[node name="PickArea" type="Area2D" parent="."]
+[node name="WeaponPickArea" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 collision_layer = 0
 collision_mask = 31
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponPickArea"]
 shape = SubResource( 2 )
+
+[node name="EnableCollisionTimer" type="Timer" parent="WeaponPickArea"]
+one_shot = true
+autostart = true
