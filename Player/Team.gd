@@ -2,10 +2,8 @@ extends Node
 class_name Team
 
 export(GlobalVar.TEAM) var team = GlobalVar.TEAM.ONE
-export(NodePath) onready var gun = get_node(gun) as Gun
 
 func _ready():
-	gun.connect("bullet_shot", self, "_set_bullet_team")
 	set_player_team()
 	
 func set_player_team():
@@ -21,7 +19,7 @@ func set_player_team():
 		GlobalVar.TEAM.NEUTRAL:
 			owner.collision_layer = 16
 	
-func _set_bullet_team(bullet: Area2D):
+func set_bullet_team(bullet: Area2D):
 	match team:
 		GlobalVar.TEAM.ONE:
 			bullet.collision_mask = 2 + 4 + 8 + 16

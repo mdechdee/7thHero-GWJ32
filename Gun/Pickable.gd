@@ -2,6 +2,21 @@ extends KinematicBody2D
 
 var move: Vector2
 
+func _ready():
+	$PickArea.connect("body_entered", self, "_on_PickArea_body_entered")
+
+func _on_PickArea_body_entered(body: Node):
+	var aimer = body.find_node("Aimer") as Node
+	if aimer == null:
+		return
+	for c in get_children():
+		if !c.is_in_group("weapon"):
+			continue
+		var weapon = c as Weapon
+		remove_child(weapon)
+		aimer.add_child(weapon)
+		queue_free()
+
 func _physics_process(delta):
 	on_move()
 	if is_on_floor():

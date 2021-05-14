@@ -1,6 +1,6 @@
 extends Node2D
 
-var current_weapon: Weapon
+var current_weapon: Weapon = null
 var weapons: Array = []
 
 func _ready():
@@ -9,7 +9,8 @@ func _ready():
 		if child.is_in_group("weapon"):
 			weapons.push_back(child)
 			owner.connect("on_attack", child, "do_attack")
-	current_weapon = weapons.front()
+	if weapons != []:
+		current_weapon = weapons.front()
 
 func add_child(child: Node, legible_unique_name: bool = false) -> void:
 	.add_child(child,legible_unique_name)
@@ -19,6 +20,10 @@ func add_child(child: Node, legible_unique_name: bool = false) -> void:
 	weapon.owner = owner
 	weapon.position += Vector2.RIGHT * 25
 	weapon.emit_signal("on_attach")
+	
+	if weapons == []:
+		current_weapon = weapon
+	weapons.append(weapon)
 
 puppet func do_aim(aim_at: Vector2):
 	look_at(aim_at)

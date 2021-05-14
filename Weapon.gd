@@ -1,5 +1,6 @@
 extends Node2D
 class_name Weapon
+# extended by Gun
 
 signal on_attach
 signal on_detach
@@ -12,7 +13,7 @@ func do_attack():
 	pass
 	
 func do_attach():
-	print("ATTACHED TO ",owner)
+	print("ATTACHED TO ",owner.name)
 	owner.connect("on_attack", self, "do_attack")
 
 func do_detach():

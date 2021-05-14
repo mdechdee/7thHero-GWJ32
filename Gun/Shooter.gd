@@ -5,9 +5,6 @@ export(float) var RATE_OF_FIRE: float = 10
 var dmg_instance: DamageInstance = DamageInstance.new()
 
 func _ready():
-	var aimer = find_parent("Aimer")
-	if aimer == null:
-		return
 	owner.connect("on_shoot", self, "do_shoot")
 	$BulletTimer.wait_time = 1/RATE_OF_FIRE
 	

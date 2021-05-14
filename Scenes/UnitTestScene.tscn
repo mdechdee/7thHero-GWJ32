@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://Door.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Deathmatch.gd" type="Script" id=4]
+[ext_resource path="res://Gun/WeaponPickable.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Gun/Gun.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "icon.png 0"
@@ -155,5 +157,10 @@ linked_door = NodePath("../../Layer1/Door1_1")
 [node name="Door2_2" parent="Layer2" instance=ExtResource( 2 )]
 position = Vector2( 691.438, -248.948 )
 linked_door = NodePath("../../Layer1/Door2_1")
+
+[node name="WeaponPickable" parent="." instance=ExtResource( 5 )]
+position = Vector2( -72.6953, -69.2372 )
+
+[node name="Gun" parent="WeaponPickable" instance=ExtResource( 6 )]
 
 [editable path="Player2"]
