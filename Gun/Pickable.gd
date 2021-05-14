@@ -1,4 +1,5 @@
 extends KinematicBody2D
+class_name WeaponPickable, "res://Icons/hand.svg"
 
 var move: Vector2
 

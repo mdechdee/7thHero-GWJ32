@@ -5,7 +5,7 @@
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Deathmatch.gd" type="Script" id=4]
 [ext_resource path="res://Gun/WeaponPickable.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Gun/Gun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ChargeGun/ChargeGun.tscn" type="PackedScene" id=7]
 
 [sub_resource type="TileSet" id=1]
 0/name = "icon.png 0"
@@ -28,18 +28,6 @@ extents = Vector2( 320, 29.8859 )
 
 [node name="UnitTestScene" type="Node2D"]
 
-[node name="Deathmatch" type="CanvasLayer" parent="."]
-script = ExtResource( 4 )
-
-[node name="Score" type="Label" parent="Deathmatch"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -255.0
-margin_bottom = 70.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Player1" parent="." instance=ExtResource( 3 )]
 position = Vector2( -201.968, -54.2712 )
 collision_layer = 2147483649
@@ -56,12 +44,20 @@ collision_layer = 2
 [node name="Input" parent="Player2" index="8"]
 script = null
 
-[node name="PuppetController" parent="Player2" index="10"]
-player_controller = NodePath("../../Player2/Input")
-movement = NodePath("../../Player2/Movement")
-
 [node name="Team" parent="Player2" index="12"]
 team = 1
+
+[node name="Deathmatch" type="CanvasLayer" parent="."]
+script = ExtResource( 4 )
+
+[node name="Score" type="Label" parent="Deathmatch"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -255.0
+margin_bottom = 70.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Layer1" type="Node2D" parent="."]
 
@@ -127,6 +123,11 @@ texture = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Layer1/Platform4"]
 shape = SubResource( 2 )
 
+[node name="WeaponPickable" parent="Layer1" instance=ExtResource( 5 )]
+position = Vector2( -109.337, -72.115 )
+
+[node name="ChargeGun" parent="Layer1/WeaponPickable" instance=ExtResource( 7 )]
+
 [node name="Layer2" type="Node2D" parent="."]
 position = Vector2( 0.161133, -1579.27 )
 
@@ -157,10 +158,5 @@ linked_door = NodePath("../../Layer1/Door1_1")
 [node name="Door2_2" parent="Layer2" instance=ExtResource( 2 )]
 position = Vector2( 691.438, -248.948 )
 linked_door = NodePath("../../Layer1/Door2_1")
-
-[node name="WeaponPickable" parent="." instance=ExtResource( 5 )]
-position = Vector2( -72.6953, -69.2372 )
-
-[node name="Gun" parent="WeaponPickable" instance=ExtResource( 6 )]
 
 [editable path="Player2"]

@@ -19,9 +19,10 @@ func _physics_process(delta):
 		adjust_acc_penalty(delta)
 	if GlobalVar.DEBUG:
 		var total_acc_radius = ACC_RADIUS + acc_radius_penalty
-		$"../DebugLine1".rotation_degrees = -total_acc_radius/2
-		$"../DebugLine2".rotation_degrees = total_acc_radius/2
-		$"../RadiusDebug".text = "Radius: " + var2str(total_acc_radius)
+		if $"../DebugLine1" != null:
+			$"../DebugLine1".rotation_degrees = -total_acc_radius/2
+			$"../DebugLine2".rotation_degrees = total_acc_radius/2
+			$"../RadiusDebug".text = "Radius: " + var2str(total_acc_radius)
 		
 func do_recoil():
 	shot_times += 1	

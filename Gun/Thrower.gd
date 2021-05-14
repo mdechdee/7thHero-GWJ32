@@ -1,4 +1,5 @@
 extends Node
+class_name Thrower
 
 export(float, 200, 500) var WEAPON_THROW_SPEED = 300
 export(PackedScene) var pickable_scene

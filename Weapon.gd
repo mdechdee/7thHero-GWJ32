@@ -18,4 +18,8 @@ func do_attach():
 
 func do_detach():
 	print("DETACHED FROM ", owner.name)
-	owner.disconnect("on_attack", self, "do_attack")
+	#method_name signal_name source
+	for connection in get_incoming_connections():
+		if connection["source"] == self:
+			continue
+		connection["source"].disconnect(connection["signal_name"], self, connection["method_name"])
