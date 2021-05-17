@@ -1,4 +1,5 @@
 extends Area2D
+class_name Bullet
 
 export(float,2,100) var BULLET_SPEED = 4
 var dmg: DamageInstance

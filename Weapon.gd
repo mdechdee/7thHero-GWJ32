@@ -13,11 +13,11 @@ func do_attack():
 	pass
 	
 func do_attach():
-	print("ATTACHED TO ",owner.name)
+	print(name + " ATTACHED TO ",owner.name)
 	owner.connect("on_attack", self, "do_attack")
 
 func do_detach():
-	print("DETACHED FROM ", owner.name)
+	print(name + " DETACHED FROM ", owner.name)
 	#method_name signal_name source
 	for connection in get_incoming_connections():
 		if connection["source"] == self:

@@ -16,7 +16,7 @@ puppet func do_attack():
 
 func do_attach():
 	.do_attach()
-	if !owner.has_node("Team"):
-		return
-	var team = owner.get_node("Team") as Team	
-	connect("bullet_shot", team, "set_bullet_team")
+	if owner.has_node("Team"):
+		var team = owner.get_node("Team") as Team	
+		connect("bullet_shot", team, "set_bullet_team")
+		

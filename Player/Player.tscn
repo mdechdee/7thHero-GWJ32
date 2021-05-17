@@ -120,6 +120,8 @@ one_shot = true
 script = ExtResource( 6 )
 player_controller = NodePath("../Input")
 movement = NodePath("../Movement")
+aimer = NodePath("../Aimer")
+stats = NodePath("../Stats")
 
 [node name="Stats" type="Node" parent="."]
 script = ExtResource( 7 )

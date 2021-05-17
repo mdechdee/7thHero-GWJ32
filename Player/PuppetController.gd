@@ -2,6 +2,7 @@ extends Node
 
 export(NodePath) onready var player_controller = get_node(player_controller) as Node
 export(NodePath) onready var movement = get_node(movement) as Movement
+export(NodePath) onready var aimer = get_node(aimer) as Node2D
 onready var body: KinematicBody2D = owner
 
 puppet var puppet_pos: Vector2
@@ -22,9 +23,9 @@ func _physics_process(delta):
 	if !owner.is_network_master():
 		body.position = puppet_pos
 		movement.move = puppet_move
-		body.get_node("HeadPosition").rotation = puppet_rot
+		aimer.rotation = puppet_rot
 		puppet_pos = body.position # To avoid jitter
 	else:
 		rset_unreliable("puppet_move", movement.move)
 		rset_unreliable("puppet_pos", body.position)
-		rset_unreliable("puppet_rot", body.get_node("HeadPosition").rotation)
+		rset_unreliable("puppet_rot", aimer.rotation)

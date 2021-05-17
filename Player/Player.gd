@@ -28,6 +28,7 @@ signal on_door_exited(door)
 signal on_enter_door()
 
 func _ready():
+	print(name + " is network master: " + var2str(is_network_master()))
 	if GlobalVar.DEBUG:
 		$Name.show()
 		$SpeedDebugger.show()

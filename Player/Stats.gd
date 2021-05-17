@@ -1,4 +1,5 @@
 extends Node
+class_name Stats
 
 export(int, 100, 200) var MAX_HP: int = 100
 var current_hp: int 

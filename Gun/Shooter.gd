@@ -1,4 +1,5 @@
 extends Node
+class_name Shooter
 
 export(PackedScene) var bullet_scene
 export(float) var RATE_OF_FIRE: float = 10
@@ -8,15 +9,13 @@ func _ready():
 	owner.connect("on_shoot", self, "do_shoot")
 	$BulletTimer.wait_time = 1/RATE_OF_FIRE
 	
-func do_shoot():
+sync func do_shoot():
 	if !$BulletTimer.is_stopped():
 		return
 	gen_bullet()
 	$BulletTimer.start()
-	if GlobalVar.IS_ONLINE and is_network_master():
-		rpc_unreliable("gen_bullet")
 
-puppet func gen_bullet():
+func gen_bullet():
 	dmg_instance.amount = 10
 	dmg_instance.dealer = find_parent("Player*")
 	

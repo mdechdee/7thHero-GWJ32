@@ -28,7 +28,7 @@ func _process(delta):
 func do_start_charge():
 	is_charging = true
 
-puppet func do_attack():
+func do_attack():
 	emit_signal("on_shoot")
 	charge = 0
 	is_charging = false
